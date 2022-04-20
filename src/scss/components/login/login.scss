@@ -1,4 +1,4 @@
-.login_box {
+.login {
     border: 1px solid black;
     width: 250px;
     height: 250px;
@@ -7,4 +7,16 @@
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
+
+    h3 {
+        text-align: center;
+    }
+
+    form {
+        padding-left: 35px;
+
+        div {
+            padding-top: 20px;
+        }
+    }
 }
