@@ -1,24 +1,27 @@
-import React, { Suspense } from 'react';
+import React from 'react';
+import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const LoginComponent = React.lazy(() => import('./login/Login'));
 
 function SuspenseComponent(Component) {
   return (
-    <Suspense fallback={null}>
+    <React.Suspense fallback={null}>
       <Component />
-    </Suspense>
+    </React.Suspense>
   );
 }
 
 class App extends React.PureComponent {
     render() {
       return (
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={SuspenseComponent(LoginComponent)} />
-          </Routes>
-        </BrowserRouter>
+        <Provider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={SuspenseComponent(LoginComponent)} />
+            </Routes>
+          </BrowserRouter>
+        </Provider>
       );
   }
 }

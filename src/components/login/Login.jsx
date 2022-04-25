@@ -9,12 +9,17 @@ class Login extends React.Component {
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleSubmit(event) {
         const { username, password } = this.state;
         alert(`Details submitted: ${username} ${password}`);
         event.preventDefault();
+    }
+
+    handleChange(event) {
+      this.setState({ [event.target.name]: event.target.value });
     }
 
     render() {
@@ -26,13 +31,13 @@ class Login extends React.Component {
               <div>
                 <label htmlFor="username">
                   Username:
-                  <input type="text" value={username} name="username" />
+                  <input type="text" value={username} onChange={this.handleChange} name="username" />
                 </label>
               </div>
               <div>
                 <label htmlFor="password">
                   Password:
-                  <input type="password" value={password} name="password" />
+                  <input type="password" value={password} onChange={this.handleChange} name="password" />
                 </label>
               </div>
               <input type="submit" value="submit" />
