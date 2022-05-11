@@ -1,50 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { createSession } from '../../reducers/Users/users';
 
-class Login extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            username: '',
-            password: '',
-        };
+const Login = function Login() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-    }
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-    handleSubmit(event) {
-        const { username, password } = this.state;
-        alert(`Details submitted: ${username} ${password}`);
-        event.preventDefault();
-    }
+  const onChangeUsername = (e) => {
+    setUsername(e.target.value);
+  };
 
-    handleChange(event) {
-      this.setState({ [event.target.name]: event.target.value });
-    }
+  const onChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
 
-    render() {
-        const { username, password } = this.state;
-        return (
-          <div className="login">
-            <h3>Login</h3>
-            <form onSubmit={this.handleSubmit}>
-              <div>
-                <label htmlFor="username">
-                  Username:
-                  <input type="text" value={username} onChange={this.handleChange} name="username" />
-                </label>
-              </div>
-              <div>
-                <label htmlFor="password">
-                  Password:
-                  <input type="password" value={password} onChange={this.handleChange} name="password" />
-                </label>
-              </div>
-              <input type="submit" value="submit" />
-            </form>
-          </div>
-        );
-    }
-}
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(createSession({ username, password }));
+    navigate('/dashboard');
+  };
+
+  return (
+    <div className="login">
+      <h3>Login</h3>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="username">
+            Username:
+            <input type="text" value={username} onChange={onChangeUsername} name="username" />
+          </label>
+        </div>
+        <div>
+          <label htmlFor="password">
+            Password:
+            <input type="password" value={password} onChange={onChangePassword} name="password" />
+          </label>
+        </div>
+        <input type="submit" value="submit" />
+      </form>
+    </div>
+  );
+};
 
 export default Login;

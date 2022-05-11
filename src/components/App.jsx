@@ -1,29 +1,17 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
-const LoginComponent = React.lazy(() => import('./login/Login'));
-
-function SuspenseComponent(Component) {
-  return (
-    <React.Suspense fallback={null}>
-      <Component />
-    </React.Suspense>
-  );
-}
+import store from '../store/store';
+import Router from '../router/Router';
 
 class App extends React.PureComponent {
     render() {
       return (
-        <Provider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={SuspenseComponent(LoginComponent)} />
-            </Routes>
-          </BrowserRouter>
+        <Provider store={store}>
+          <Router />
         </Provider>
       );
   }
 }
 
 export default App;
+// https://www.bezkoder.com/react-hooks-redux-login-registration-example/
